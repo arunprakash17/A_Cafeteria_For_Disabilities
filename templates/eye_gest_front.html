@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Gesture Detection</title>
+    <style>
+        #videoElement {
+            width: 640px;
+            height: 480px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eye Gesture Detection</h1>
+    <video id="videoElement" autoplay></video>
+    
+    <script>
+        const video = document.getElementById('videoElement');
+
+        // Get webcam stream and display it in the video element
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing camera:', error);
+            });
+
+        // Function to capture frame from webcam and send it to the backend for eye gesture detection
+        function captureFrame() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg');
+
+            // Send captured frame to the backend for processing
+            fetch('/eye_gestures', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image_data: imageData })
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Capture frame every 100 milliseconds (adjust as needed)
+        setInterval(captureFrame, 100);
+    </script>
+</body>
+</html>

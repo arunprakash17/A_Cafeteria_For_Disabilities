@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DISABILITY SUPPORTER</title>
+</head>
+<style>   
+body{
+    background: linear-gradient(black,#0ef);
+}
+.home h1,p{
+    color: springgreen;
+    text-align: right;
+    animation:flyinleft 1s ease-in-out forwards;
+}
+.options{
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+    grid-gap: 3rem;
+    align-items: center;
+    margin:4rem;
+    margin-left: 40rem;
+    cursor: pointer;
+    margin-top: 5rem;
+    transition: .3s ease;
+    transition: .3s ease;
+    
+}
+#btn1,#btn2,#btn3,#btn4,#btn5,#btn6{
+    background: none;
+    border: 7px solid springgreen;
+    border-radius:27%;
+    padding: 10px;
+}
+#btn1,#btn2,#btn3,#btn4,#btn5,#btn6 :hover{
+    transform: scale(1.1);
+}
+#btn1{
+    animation:flyinleft 2s ease-in-out forwards;
+}
+#btn2{
+    animation:flyinleft 2.3s ease-in-out forwards;
+}
+#btn3{
+    animation:flyinleft 2.6s ease-in-out forwards;
+}
+#btn4{
+    animation:flyinleft 2.9s ease-in-out forwards;
+}
+#btn5{
+    animation:flyinleft 3.2s ease-in-out forwards;
+}
+#btn6{
+    animation:flyinleft 3.5s ease-in-out forwards;
+}
+.layer{
+    background-image: url('/static/images/pentbg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 44.3rem;
+    width:25rem;
+    color: black;
+    left: 0;
+    top: -47.5rem;
+    position: absolute;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 4rem;
+    transform: translateY(100%);
+    transition: .3s ease;
+}
+@keyframes floating{
+    0%{ transform: translate(0,0px);}
+    100%{ transform: translate(0,15px);}
+    100%{ transform: translateY(0,-0px);}
+}
+@keyframes flyinleft{
+    0%{ transform: translateX(-1000%);
+    opacity: 0;}
+    100%{ transform: translateX(0%);
+    opacity: 1;}
+}
+@keyframes flyinright{
+    0%{ transform: translateY(-100%);
+    opacity: 0;}
+    100%{ transform: translateY(0%);
+    opacity: 1;}
+}
+.layer .b{
+    animation:flyinleft 1.5s ease-in-out forwards;
+    margin-left: 7rem;
+    margin-top: 0.4rem;
+    
+}
+.layer .c{
+    animation:flyinright 1.7s ease-in-out forwards;
+    margin-left: 7rem;
+    margin-top: 18rem;
+}
+.layer .l{
+    animation:flyinleft 1.9s ease-in-out forwards;
+    margin-top: -33.5rem;
+    margin-left: 14rem;
+}
+.layer .r{
+    animation:flyinright 2.1s ease-in-out forwards;
+    margin-top: -12rem;
+    margin-left: 0rem;
+}
+
+</style>
+<body>
+    <div class="home">
+    <h1>This Is An Website to Provide AIDING Support <br>To Physically Challengable Persons</h1>
+    <p>Various Options Of Supports Are Chategorized Below Choose Them As Your Wish. </p>
+    </div>
+    <div  class="layer">
+        <img class="c" src="{{url_for('static',filename='/images/pentc.png')}}" alt="img" width="200px" height="200px">
+        <img class="b" src="{{url_for('static',filename='/images/pentb.png')}}" alt="img" width="200px" height="200px">
+        <img class="l" src="{{url_for('static',filename='/images/pentl.png')}}" alt="img" width="200px" height="200px">
+        <img class="r" src="{{url_for('static',filename='/images/pentr.png')}}" alt="img" width="200px" height="200px">
+    </div>
+    <div class="options">
+        <form action="/blind_only" method="post">
+            <input id="btn1" type="image" src="{{url_for('static',filename='/images/deaf_nd_dumkb.webp')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+    
+        <form action="/blind_nd_dumb" method="post">
+            <input id="btn2" type="image" src="{{url_for('static',filename='/images/blind.png')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+
+        <form action="/disable_nd_blind" method="post">
+            <input id="btn3" type="image" src="{{url_for('static',filename='/images/bg.webp')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+
+
+        <form action="/disabled_nd_deaf" method="post">
+            <input id="btn4" type="image" src="{{url_for('static',filename='/images/disability.jpeg')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+
+        <form action="/deaf_nd_dumb_nd_disable" method="post">
+            <input id="btn5" type="image" src="{{url_for('static',filename='/images/disability.jpeg')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+
+        <form action="/deaf_nd_dumb" method="post">
+            <input id="btn6" type="image" src="{{url_for('static',filename='/images/disability.jpeg')}}" alt="SUBMIT"  width="120" height="120">
+        </form>
+
+    </div>
+
+</body>
+</html>

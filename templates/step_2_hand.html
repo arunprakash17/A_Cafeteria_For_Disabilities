@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 2: Record Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center; 
+            align-items: start; 
+            height: 100vh;
+        }
+        .container {
+            width: 700px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centering text */
+        }
+        h2 {
+            color: #007bff; /* Changed heading color */
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.5;
+            margin-bottom: 10px; /* Added spacing between paragraphs */
+        }
+        div {
+            font-weight: bold; /* Made the "Your order:" text bold */
+            color: #555; /* Changed text color */
+            margin-bottom: 10px; /* Added spacing below "Your order:" text */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Step 2: Record Order</h2>
+        <p><span style="font-style: italic;">MAKE YOUR ORDER USING HAND GESTURES</span></p>
+        <p>IF YOU WANT <span style="color: #4CAF50; font-weight: bold;">TEA</span>, SHOW ONE FINGER</p>
+        <p>IF YOU WANT <span style="color: #FF5722; font-weight: bold;">COFFEE</span>, SHOW TWO FINGERS</p>
+        <div>Your order:</div>
+        <form action="/fingerCounter" method="post">
+            <button id="nextStep2">MAKE ORDER</button>
+        </form>
+    </div>
+
+    <br />
+   <script>
+    setTimeout(()=>{
+        const btn = document.getElementById('nextStep2');
+        btn.click();
+    },15000);
+   </script>
+</body>
+</html>

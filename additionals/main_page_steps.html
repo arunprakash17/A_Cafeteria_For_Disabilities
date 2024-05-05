@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Placement</title>
+    <style>
+        /* Add your CSS styles here */
+        .step {
+            display: none;
+        }
+
+        .active-step {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Step 1: Instructions -->
+    <div id="step1" class="step active-step">
+        <h2>Step 1: Instructions</h2>
+        <p>Follow the instructions below to place your order:</p>
+        <ol>
+            <li>Use hand gesture to specify your order.</li>
+            <li>Click the "Next" button to record your order.</li>
+        </ol>
+        <button id="nextStep1">Next</button>
+    </div>
+
+    <!-- Step 2: Record Order -->
+    <div id="step2" class="step">
+        <h2>Step 2: Record Order</h2>
+        <p>Use hand gesture to order food by showing 1 finger for coffee and 2 fingers for tea.</p>
+        <div id="recordedOrder"></div>
+        <form action="/finger_counter" method="get">
+            <button id="nextStep2">Next</button>
+        </form>
+    </div>
+
+    <!-- Step 3: Display Order -->
+    <div id="step3" class="step">
+        <h2>Step 3: Display Order</h2>
+        <p>Your order:
+            {{order}}
+        </p>
+        <div id="displayedOrder"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const nextStep1Button = document.getElementById('nextStep1');
+        const nextStep2Button = document.getElementById('nextStep2');
+        const recordedOrderDiv = document.getElementById('recordedOrder');
+        const displayedOrderDiv = document.getElementById('displayedOrder');
+
+        // Function to switch to the next step
+        function goToNextStep(currentStep, nextStep) {
+            currentStep.classList.remove('active-step');
+            nextStep.classList.add('active-step');
+        }
+
+        // Function to record the order (you can implement this based on your chosen input method)
+        function recordOrder() {
+            // Simulate recording the order
+            recordedOrderDiv.innerText = "Your order: Burger, Fries, Coke";
+        }
+
+        // Event listener for next button in Step 1
+        nextStep1Button.addEventListener('click', () => {
+            goToNextStep(step1, step2);
+        });
+
+        // Event listener for next button in Step 2
+        nextStep2Button.addEventListener('click', () => {
+            recordOrder();
+            goToNextStep(step2, step3);
+        });
+    </script>
+</body>
+</html>

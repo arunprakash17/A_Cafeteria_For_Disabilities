@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming</title>
+</head>
+<body>
+    <h1> Video </h1>
+    <video id="videoElement" autoplay></video>
+    
+    <script>
+        var videoElement = document.getElementById('videoElement');
+        var chunks = [];
+    
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                videoElement.srcObject = stream;
+                var mediaRecorder = new MediaRecorder(stream);
+                mediaRecorder.ondataavailable = function(event) {
+                    console.log('suce');
+                    chunks.push(event.data);
+                };
+                mediaRecorder.start(1000); // Capture frames every 1 second
+    
+                mediaRecorder.onstop = function() {
+                    var formData = new FormData();
+                    console.log("helo");
+                    var blob = new Blob(chunks, { type: 'video/webm' });
+                    formData.append('video', blob);
+                    fetch('/stream', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => console.log('Video data sent to server'))
+                    .catch(error => console.error('Error sending video data:', error));
+                    chunks = [];
+                };
+            })
+            .catch(function (err) {
+                console.error('Error accessing the camera:', err);
+            });
+    </script>
+    
+    
+</body>
+</html>

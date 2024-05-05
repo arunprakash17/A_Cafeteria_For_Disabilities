@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: start; 
+            height: 100vh; 
+        }
+        .container {
+            width: 500px;
+            padding: 40px; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);  
+            text-align: center; 
+        }
+        h1 {
+            color: #4CAF50; 
+            margin-bottom: 30px; 
+        }
+        button {
+            background-color: #007bff; 
+            color: #fff;
+            border: none;
+            padding: 14px 28px; 
+            border-radius: 8px; 
+            cursor: pointer;
+            font-size: 20px; 
+            margin-top: 30px; 
+        }
+        button:hover {
+            background-color: #0056b3; 
+        }
+        #output {
+            margin-top: 30px; 
+            font-size: 24px; 
+            color: #333; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Make your Order through Voice</h1>
+        <button id="recordButton">Speak</button>
+        <div id="output"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const recordButton = document.getElementById('recordButton');
+        const output = document.getElementById('output');
+        setTimeout(()=>{
+            recordButton.click();
+        },4000);
+        recordButton.addEventListener('click', () => {
+            startRecognition();
+        });
+
+        async function startRecognition() {
+            try {
+                const result = await recognizeSpeech();
+                // Pass the result to the other HTML page
+                window.location.href = 'step_3.html?data=' + encodeURIComponent(result);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function recognizeSpeech() {
+            return new Promise((resolve, reject) => {
+                if ('webkitSpeechRecognition' in window) {
+                    const recognition = new webkitSpeechRecognition();
+                    recognition.lang = 'en-US';
+
+                    recognition.onresult = function(event) {
+                        const result = event.results[0][0].transcript;
+                        output.innerText = result;
+                        console.log(result);
+                        resolve(result);
+                    }
+
+                    recognition.onerror = function(event) {
+                        output.innerText = 'Error occurred in speech recognition';
+                        reject('Error occurred in speech recognition');
+                    }
+
+                    recognition.start();
+                } else {
+                    output.innerText = 'Speech recognition not supported in this browser';
+                    reject('Speech recognition not supported in this browser');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

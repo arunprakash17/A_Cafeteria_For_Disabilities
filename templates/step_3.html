@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color:teal;
+            text-decoration:underline;
+            text-transform:uppercase;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order {
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        img {
+            width: 400px;
+            height: 400px;
+            display: none;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        span{
+            text-transform:uppercase;
+            color:green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Display Order</h1>
+        <h2 id="orderDisplay" class="order">Your Awesome Order: <span id="orderValue">{{data}}</span></h2>
+        <img src="" id="orderImage" alt="Order Image">
+    </div>
+
+    <script>
+        const orderValue = "{{data}}";
+        const orderImage = document.getElementById('orderImage');
+
+        function loadImage() {
+            const data = orderValue.toLowerCase();
+            if (data == 'coffee') {
+                orderImage.style.display = 'block';
+                orderImage.src = "{{url_for('static',filename='/images/coffee.jpeg')}}"; // Replace 'coffee.jpg' with your actual image path
+            } else if (data === 'tea') {
+                orderImage.style.display = 'block';
+                orderImage.src = "{{url_for('static',filename='/images/tea.jpeg')}}"; // Replace 'tea.jpg' with your actual image path
+            }
+        }
+        loadImage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 2: Record Order</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center; 
+            align-items:start; 
+            height: 100vh; 
+        }
+        .container {
+            width: 700px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; 
+        }
+        h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .highlight {
+            color: #007bff; 
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Step 2: Record Order</h2>
+        <p><span class="highlight">MAKE YOUR ORDER THROUGH EYE GESTURES</span></p>
+        <p>If you want <span class="highlight">TEA</span>, blink <span class="highlight">1 TIME</span></p>
+        <p>If you want <span class="highlight">COFFEE</span>, blink <span class="highlight">2 TIMES</span></p>
+        <form action="/eye_gesture" method="post">
+            <button id="nextStep2">MAKE ORDER</button>
+        </form>
+    </div>
+    <script>
+        setTimeout(()=>{
+            const btn = document.getElementById('nextStep2');
+            btn.click();
+        },15000);
+        setTimeout(()=>{
+            const synth = window.speechSynthesis;
+            let text = "System is ready to detect your eye blinking";
+            const utterThis = new SpeechSynthesisUtterance(text);
+            synth.speak(utterThis);
+        },2000);
+    </script>
+</body>
+</html>

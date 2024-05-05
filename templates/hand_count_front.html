@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Frame Capture</title>
+</head>
+<body>
+    <!--<form id="frameForm" action="/process_frame" method="POST">
+        <input type="hidden" id="imageDataInput" name="image">
+        <button type="submit">Send Frame</button>
+    </form>-->
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <img src="{{ url_for('generateFrames') }}" alt="Please turn on your camera !"/> 
+    <script>
+        /*const video = document.getElementById('video');
+        const frameForm = document.getElementById('frameForm');
+        const imageDataInput = document.getElementById('imageDataInput');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                video.srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        function captureFrame() {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = canvas.toDataURL('image/jpeg'); // Convert to base64 JPEG image
+            imageDataInput.value = imageData; // Set the value of the hidden input field
+            frameForm.submit(); // Submit the form to send the data to the server
+        }
+
+        setTimeout(captureFrame, 5000); // Capture and send frame every second*/
+    </script>
+</body>
+</html>
